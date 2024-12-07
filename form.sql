@@ -1,0 +1,35 @@
+USE crud;
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(100) NOT NULL,
+    cedula VARCHAR(30) NOT NULL,
+    correo VARCHAR(200) NOT NULL
+);
+
+ALTER TABLE usuario MODIFY nombre VARCHAR(150);
+ALTER TABLE usuario MODIFY ciudad VARCHAR(150);
+ALTER TABLE usuario MODIFY cedula VARCHAR(30);
+ALTER TABLE usuario MODIFY correo VARCHAR(250);
+
+DELETE FROM usuario ;
+
+ALTER TABLE usuario ADD CONSTRAINT cedula_uk UNIQUE KEY (cedula);
+ALTER TABLE usuario ADD CONSTRAINT correo_uk UNIQUE KEY (correo);
+
+ALTER TABLE usuario MODIFY COLUMN cedula VARCHAR(225) NOT NULL;
+ALTER TABLE usuario MODIFY COLUMN correo VARCHAR(225)  NOT NULL;
+
+CREATE TABLE registro (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(225) NOT NULL,
+    contraseña INT NOT NULL
+);
+
+ALTER TABLE registro MODIFY contraseña VARCHAR(225);
+ALTER TABLE registro RENAME COLUMN registro TO usuario ;
+ALTER TABLE registro DROP COLUMN nombre;
+RENAME TABLE registro to login;
+RENAME TABLE usuario  TO formulario;
